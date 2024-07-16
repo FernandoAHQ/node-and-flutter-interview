@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/articles_search_results.dart';
-import 'package:frontend/widgets/index.dart';
 
 class SearchArticleDelegate extends SearchDelegate {
   @override
@@ -12,7 +11,7 @@ class SearchArticleDelegate extends SearchDelegate {
 
   @override
   Widget? buildLeading(BuildContext context) {
-    // return const Text('Leading');
+    return null;
   }
 
   @override

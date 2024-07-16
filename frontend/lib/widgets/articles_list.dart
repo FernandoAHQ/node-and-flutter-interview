@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/article.dart';
 import 'package:frontend/services.dart';
 import 'package:frontend/styles.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ArticlesList extends StatelessWidget {
   const ArticlesList({super.key, required this.articles});
@@ -25,7 +23,7 @@ class ArticlesList extends StatelessWidget {
         launchURL(article.url);
       },
       child: Container(
-        height: 120.0,
+        //height: 120.0,
         padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 14.0),
         child: Card(
           color: Colors.white,

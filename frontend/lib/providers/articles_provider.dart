@@ -22,7 +22,6 @@ class ArticlesProvider extends ChangeNotifier {
       Response response = await http.get(Uri.parse(apiEndpointAll));
 
       if (response.statusCode == 200) {
-        print('200');
         articlesResponse = ArticlesResponse.fromJson(jsonDecode(response.body));
         error = '';
       } else {
@@ -45,17 +44,14 @@ class ArticlesProvider extends ChangeNotifier {
           .get(Uri.parse(apiEndpointAll).replace(queryParameters: queryParams));
 
       if (response.statusCode == 200) {
-        print('200');
         articlesSearchResponse =
             ArticlesResponse.fromJson(jsonDecode(response.body));
         error = '';
       } else {
-        print(error);
         error = response.statusCode.toString();
       }
     } catch (e) {
       error = e.toString();
-      print(error);
     }
     isLoading = false;
     notifyListeners();
