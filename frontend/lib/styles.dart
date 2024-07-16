@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const loadingStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0, color: Color.fromARGB(255, 72, 156, 224));
+
 const TextStyle AppBarHeader =
     TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0);
 const TextStyle header1 =

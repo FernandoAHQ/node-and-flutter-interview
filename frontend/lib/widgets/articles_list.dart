@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/article.dart';
+import 'package:frontend/services.dart';
 import 'package:frontend/styles.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,6 +12,7 @@ class ArticlesList extends StatelessWidget {
   Widget build(BuildContext context) {
     print(articles);
     return ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
         itemCount: articles.length,
         itemBuilder: (context, index) {
           return buildArticleCard(articles[index], context);
@@ -20,7 +22,7 @@ class ArticlesList extends StatelessWidget {
   Widget buildArticleCard(Article article, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _launchURL(article.url);
+        launchURL(article.url);
       },
       child: Container(
         height: 120.0,
@@ -42,7 +44,7 @@ class ArticlesList extends StatelessWidget {
                       placeholder:
                           const AssetImage("assets/images/placeholder.jpg"),
                       imageErrorBuilder: (context, error, stackTrace) {
-                        return Image.asset('assets/images/error.jpg',
+                        return Image.asset('assets/images/Image-not-found.png',
                             fit: BoxFit.cover);
                       },
                       fit: BoxFit.cover,
@@ -82,43 +84,5 @@ class ArticlesList extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  ListTile buildArticleTile(Article article, BuildContext context) {
-    return ListTile(
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(6.0),
-          child: SizedBox.fromSize(
-              size: Size.square(100),
-              child: FadeInImage(
-                image: NetworkImage(article.urlToImage),
-                placeholder: const AssetImage("assets/images/placeholder.jpg"),
-                imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/images/error.jpg',
-                      fit: BoxFit.cover);
-                },
-                fit: BoxFit.cover,
-              )),
-        ),
-        title: Text(article.title,
-            style: header1, overflow: TextOverflow.ellipsis, maxLines: 1),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              article.author,
-              style: header3,
-            ),
-            Text(article.description,
-                style: header2, overflow: TextOverflow.ellipsis, maxLines: 2),
-          ],
-        ));
-  }
-}
-
-_launchURL(String articleUrl) async {
-  final Uri url = Uri.parse(articleUrl);
-  if (!await launchUrl(url)) {
-    throw Exception('Could not launch $url');
   }
 }

@@ -1,6 +1,7 @@
 const Article = require('../models/articles.model');
 
 const getAllArticles = async(req, res = response ) => { 
+    console.log('API HIT');
     const query = req.query.search;
     filter = {}
     if(query) {

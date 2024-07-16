@@ -26,16 +26,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: buildAppBar(context),
         backgroundColor: bgGray,
-        body: articlesProvider.isLoading
-            ? const LoadingUi()
-            : articlesProvider.error.isNotEmpty
-                ? ErrorUi(error: articlesProvider.error)
-                : ArticlesList(
-                    articles: articlesProvider.articlesResponse.articles));
+        body: RefreshIndicator(
+          onRefresh: _handleRefresh,
+          child: articlesProvider.isLoading
+              ? const LoadingUi()
+              : articlesProvider.error.isNotEmpty
+                  ? ErrorUi(error: articlesProvider.error)
+                  : ArticlesList(
+                      articles: articlesProvider.articlesResponse.articles),
+        ));
   }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.white,
       title: Image.asset(
         'assets/images/netforemost.png',
         fit: BoxFit.cover,
@@ -53,5 +57,22 @@ class _HomeScreenState extends State<HomeScreen> {
         )
       ],
     );
+  }
+
+  Future<void> _handleRefresh() async {
+    try {
+      final articlesProvider =
+          Provider.of<ArticlesProvider>(context, listen: false);
+      setState(() {
+        articlesProvider.getData();
+      });
+    } catch (error) {
+      // Handle the error, e.g., by displaying a snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to refresh'),
+        ),
+      );
+    }
   }
 }

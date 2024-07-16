@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/styles.dart';
 
 class LoadingUi extends StatelessWidget {
   const LoadingUi({super.key});
@@ -6,7 +7,7 @@ class LoadingUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Loading...'),
+      child: Text('Loading...', style: loadingStyle),
     );
   }
 }

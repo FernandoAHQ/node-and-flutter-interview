@@ -5,8 +5,8 @@ class ErrorUi extends StatelessWidget {
   final String error;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('ERROR: $error'),
+    return const Center(
+      child: Text('Connection Error'),
     );
   }
 }

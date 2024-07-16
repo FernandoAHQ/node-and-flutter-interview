@@ -24,7 +24,6 @@ class SearchArticleDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
     return Container(
       color: Colors.white,
     );
